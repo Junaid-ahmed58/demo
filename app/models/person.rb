@@ -5,23 +5,22 @@ class Person < ApplicationRecord
     # validates :salary, comparison: { greater_than: 10 } 
     #validates :salary, comparison: {less_than_or_equal_to: 50, message: "junaid" }
     #validates :salary, numericality: true
-    #validates :name, :email, uniqueness: true
+    validates :name, :email, uniqueness: true
     #validates :email, format: { with: /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i }
 
    
     before_create :greeting_message
 
     def greeting_message
-     puts "Hey! I will run before you update an object!"
+     puts "Hey! I will run before you create an object!"
     end
    
     after_create :display_student_marks
     def display_student_marks
         if self.marks.present?
-            marks = marks < 100
-            puts "=======Mark of person is #{age}========"
+            puts "=======Marks of person is #{marks}========"
         else
-            puts "=======Marks of person is not caluclated======="
+            puts "=======Marks of person is not added======="
         end
     end
 
