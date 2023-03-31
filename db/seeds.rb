@@ -5,3 +5,8 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
+
+Author.all.each do |author|
+    author.blog.create(title: "Dummy Blog for Author #{author_id}", content: "Custom content pending")
+    author.blog.create(title: "Dummy Blog for Author #{author_id}", content: "Custom content pending")
+end

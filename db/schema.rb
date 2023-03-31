@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_30_072308) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_30_114329) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -21,11 +21,29 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_30_072308) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "articles_authors", id: false, force: :cascade do |t|
+    t.bigint "article_id", null: false
+    t.bigint "author_id", null: false
+  end
+
   create_table "authors", force: :cascade do |t|
     t.string "name"
     t.string "books"
     t.string "father_name"
     t.string "email"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "blogs", force: :cascade do |t|
+    t.string "title"
+    t.text "content"
+    t.integer "author_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "comments", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -58,6 +76,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_30_072308) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "salary"
+  end
+
+  create_table "posts", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "products", force: :cascade do |t|
