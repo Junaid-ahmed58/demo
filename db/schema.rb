@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_31_075303) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_31_102750) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -85,6 +85,23 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_31_075303) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "events", force: :cascade do |t|
+    t.string "title"
+    t.string "venue"
+    t.string "address"
+    t.date "scheduled_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "feedbacks", force: :cascade do |t|
+    t.string "title"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "commentable_type"
+    t.integer "commentable_id"
+  end
+
   create_table "manager_histories", force: :cascade do |t|
     t.date "joining_date"
     t.string "total_experience"
@@ -102,6 +119,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_31_075303) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["department_id"], name: "index_managers_on_department_id"
+  end
+
+  create_table "news", force: :cascade do |t|
+    t.string "title"
+    t.boolean "is_live"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "people", force: :cascade do |t|
