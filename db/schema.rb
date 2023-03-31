@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_30_114329) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_31_063640) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -24,6 +24,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_30_114329) do
   create_table "articles_authors", id: false, force: :cascade do |t|
     t.bigint "article_id", null: false
     t.bigint "author_id", null: false
+  end
+
+  create_table "author_projects", force: :cascade do |t|
+    t.bigint "author_id", null: false
+    t.bigint "project_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.date "submission_date"
+    t.index ["author_id"], name: "index_author_projects_on_author_id"
+    t.index ["project_id"], name: "index_author_projects_on_project_id"
   end
 
   create_table "authors", force: :cascade do |t|
@@ -94,4 +104,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_30_114329) do
     t.index ["supplier_type", "supplier_id"], name: "index_products_on_supplier"
   end
 
+  create_table "projects", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_foreign_key "author_projects", "authors"
+  add_foreign_key "author_projects", "projects"
 end
