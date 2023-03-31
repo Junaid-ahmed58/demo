@@ -4,6 +4,8 @@ class Article < ApplicationRecord
   def log_destroy_action
     puts "Article destroyed"
   end
-  has_and_belongs_to_many :author, foreign_key: "author_id"
+  has_one :sub_article
+  has_and_belongs_to_many :author
+  
   
 end
