@@ -5,8 +5,8 @@ class Article < ApplicationRecord
     puts "Article destroyed"
   end
   has_many :feedback, as: :commentable
-  #has_one :sub_article
-  #has_and_belongs_to_many :author
+  has_one :sub_article
+  has_and_belongs_to_many :author
   
   
 end
