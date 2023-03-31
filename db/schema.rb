@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_31_072519) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_31_075303) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -63,6 +63,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_31_072519) do
     t.bigint "product_id", null: false
   end
 
+  create_table "departments", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "doctor", force: :cascade do |t|
     t.string "name"
     t.string "email"
@@ -77,6 +83,25 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_31_072519) do
     t.boolean "is_active", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "manager_histories", force: :cascade do |t|
+    t.date "joining_date"
+    t.string "total_experience"
+    t.bigint "manager_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["manager_id"], name: "index_manager_histories_on_manager_id"
+  end
+
+  create_table "managers", force: :cascade do |t|
+    t.string "name"
+    t.string "email"
+    t.string "contact"
+    t.bigint "department_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["department_id"], name: "index_managers_on_department_id"
   end
 
   create_table "people", force: :cascade do |t|
@@ -121,5 +146,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_31_072519) do
 
   add_foreign_key "author_projects", "authors"
   add_foreign_key "author_projects", "projects"
+  add_foreign_key "manager_histories", "managers"
+  add_foreign_key "managers", "departments"
   add_foreign_key "sub_articles", "articles"
 end
