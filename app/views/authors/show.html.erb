@@ -20,3 +20,6 @@
 
 
 <%= link_to 'Back', authors_path %>
+
+<%= link_to 'blog details', author_blog_path(@author, @blog)%>
+<%= link_to 'Edit blog', [:edit, @author, @blog]%>
