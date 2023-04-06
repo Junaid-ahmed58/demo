@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :users
   resources :projects
  
   root 'people#index'
@@ -28,8 +29,10 @@ Rails.application.routes.draw do
   #scope '/admin' do
    # resources :articles, :comments
   #end
-
   #resources :articles do
+    #resources :comments, only: [:index, :new, :create]
+  
+    #resources :articles do
   #  resources :comments, shallow: true
   #end
   resources :articles do
@@ -49,14 +52,21 @@ Rails.application.routes.draw do
   #get 'blogs/:id/:user:id', to: 'blogs#show'
 
   #get 'blogs/:id/with_user/:user_id', to: 'blogs#show'
+  
   #get 'blogs/:id', to: 'blogs#show', defaults: { format: 'jpg'}
+  
   #get 'blogs', to: 'blogs#destroy', as: :logout
+  
   match 'blogs', to: 'blogs#show', via: [:get, :post]
+  
   #get 'blogs/:id', to: 'blogs#show', constraints: { id: /[A-Z]\d{5}/ }
+  
   get 'blogs/:id', to: 'blogs#show', id: /[A-Z]\d{5}/ 
 
   get 'articles', to: 'articles#index', constraints: { subdomain: 'admin' }
-
-  get '*path', to: 'author#index', constraints: authorConstraint.new
+  
+  get '/articles/:status', to: 'clients#index', foo: 'bar'
+  
+  #get '*path', to: 'author#index', constraints: authorConstraint.new
 end
 

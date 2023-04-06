@@ -1,29 +1,32 @@
 class ArticlesController < ApplicationController
-def index
-        @articles = Article.all
-end
-def show
-        @article = Article.find(params[:id])
-end
-def new
-    @article = Article.new
-end
-
-def edit
+  def index
+   @articles = Article.all
+  end
+  def show
     @article = Article.find(params[:id])
-end
+  end
+  def new
+    @article = Article.new
+  end
 
-def create 
+  def edit
+    @article = Article.find(params[:id])
+  end
+
+  def create 
     @article = Article.new(article_params)
-
-   
-   if @article.save
-    redirect_to @article
+    if @article.save
+     redirect_to @article
     else
-        render 'new'
+      render 'new'
     end
-end
-def update
+    if article = Article.authenticate(params[:title],params[:text])
+      session[:current_article_id] = article.id
+      redirect_to root_url
+    end
+  end
+
+  def update
     @article = Article.find(params[:id])
    
     if @article.update(article_params)
@@ -31,23 +34,27 @@ def update
     else
       render 'edit'
     end 
-end 
+  end 
 
 
-def destroy
-  @article = Article.find(params[:id])
-  @article.destroy
+  def destroy
+   @article = Article.find(params[:id])
+   @article.destroy
  
-  redirect_to articles_path
-end 
+   redirect_to articles_path
+   session.delete(current_article_id)
+   @_current_article = nil
+   redirect_to root_url
+  end 
 
-def junaid
-end
+  def junaid
+  end
 
 
 private
   def article_params
     params.require(:article).permit(:title, :text)
+
   end
 end
 
