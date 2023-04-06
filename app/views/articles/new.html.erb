@@ -14,6 +14,12 @@
       </ul>
     </div>
   <% end %>
+
+   <form accept-charset="UTF-8" action="/articles" method="post">
+  <input type="text" name="article[name]" value="Ruby" />
+  <input type="text" name="article[text]" value="" />
+  <input type="text" name="article[summary]" value="" />
+</form>
  
   <p>
     <%= form.label :title %><br>
@@ -25,10 +31,7 @@
     <%= form.text_area :text %>
   </p>
 
-  <p>
-    <%= form.label :summary %><br>
-    <%= form.text_area :summary %>
-  </p>
+ 
  
   <p>
     <%= form.submit %>
