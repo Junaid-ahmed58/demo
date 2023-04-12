@@ -19,6 +19,21 @@ class PeopleController < ApplicationController
   def edit
   end
 
+  # DELETE /people/1 or /people/1.json
+  def destroy
+    @author = Author.find(params[:id])
+    @author.destroy
+
+    redirect_to authors_path
+  end
+
+  def upload
+    uploaded_file = params[:picture]
+    File.open(Rails.root.join('public', 'uploads', uploaded_file.original_filename), 'wb') do |file|
+      file.write(uploaded_file.read)
+    end
+  end
+
   # POST /people or /people.json
   def create
     @person = Person.new(person_params)
@@ -47,15 +62,8 @@ class PeopleController < ApplicationController
     end
   end
 
-  # DELETE /people/1 or /people/1.json
-  def destroy
-    @person.destroy
-
-    respond_to do |format|
-      format.html { redirect_to people_url, notice: "Person was successfully destroyed." }
-      format.json { head :no_content }
-    end
-  end
+  
+  
 
   private
     # Use callbacks to share common setup or constraints between actions.

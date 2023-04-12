@@ -9,7 +9,7 @@ class AuthorsController < ApplicationController
     @author = Author.new
   end
   def create 
-    @author = Author.new(params[:author])
+    @author = Author.create(params[:author])
    if @author.save
      redirect_to @author
    else

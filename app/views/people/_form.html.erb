@@ -1,19 +1,63 @@
-<%= form_with(model: person) do |form| %>
-  <% if person.errors.any? %>
+<%= form_with(model: @person) do |form| %>
+  <% if @person.errors.any? %>
     <div style="color: red">
-      <h2><%= pluralize(person.errors.count, "error") %> prohibited this person from being saved:</h2>
+      <h2><%= pluralize(@person.errors.count, "error") %> prohibited this @person from being saved:</h2>
 
       <ul>
-        <% person.errors.each do |error| %>
+        <% @person.errors.each do |error| %>
           <li><%= error.full_message %></li>
         <% end %>
       </ul>
     </div>
   <% end %>
+  <%#= check_box_tag(:check_human) %>
+  <%#= label_tag(:check_human, "I am not a Robot") %>
+  <%#= check_box_tag(:check_human) %>
+  <%#= label_tag(:check_human, "I am not a Robot") %>
+  <%#= radio_button_tag(:age, "child") %>
+  <%#= label_tag(:age_child, "I am younger than 20") %>
+  <%#= radio_button_tag(:age, "adult") %>
+  <%# label_tag(:age_adult, "I am over 20") %>
+  <%#= text_area_tag(:message, "Hi, nice site", size: "24x6") %>
+  <%#= text_field(:message, "Hi, nice site", size: "24x6") %>
 
+  <%#= password_field_tag(:password) %>
+  <%#= hidden_field_tag(:parent_id, "5") %>
+  <%#= search_field(:user, :name) %>
+  <%#= telephone_field(:user, :phone) %>
+  <%#= date_field(:user, :born_on) %>
+  <%#= datetime_local_field(:user, :graduation_day) %>
+  <%#= month_field(:user, :birthday_month) %>
+  <%#= week_field(:user, :birthday_week) %>
+  <%#= url_field(:user, :homepage) %>
+  <%#= email_field(:user, :address) %>
+  <%#= color_field(:user, :favorite_color) %>
+  <%#= time_field(:task, :started_at) %>
+  <%#= number_field(:product, :price, in: 1.0..20.0, step: 0.5) %>
+  <%#= range_field(:product, :discount, in: 1..1000) %>
+
+  <%#= text_field(:person, :name) %>
+  <%#= form.file_field :picture %>
+
+  <%#= select_date Date.today, prefix: :start_date %>
+  <%#= select_tag :gender, values {'male','femail'}%>
+  <%#= select_year(2009) %>
+  <%#= select_month(Time.new(2009)) %>
+
+  <%# <input id="person_name" name="person[name]" type="text" value= "Henry"/>
+  <input id="person_address_city" name="person[address][city]" type="text" value="New York"/> %>
+
+  
+  
+  
   <div>
     <%= form.label :name, style: "display: block" %>
     <%= form.text_field :name %>
+  </div> 
+
+  <div>
+    <%= form.label :city, style: "display: block" %>
+    <%= form.text_field :city %>
   </div>
 
   <div>
@@ -30,3 +74,6 @@
     <%= form.submit %>
   </div>
 <% end %>
+
+
+<%= %>

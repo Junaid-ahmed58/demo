@@ -1,7 +1,10 @@
 Rails.application.routes.draw do
+  get 'leaves/index'
+  get 'leaves/create'
+  get 'leaves/update'
   resources :users
   resources :projects
- 
+  resources :news
   root 'people#index'
   resources :people
   get 'welcome/index'
@@ -22,19 +25,21 @@ Rails.application.routes.draw do
    #resources :articles, :comments
   #end
 
-  #scope module: 'admin' do
-  #  resources :articles, :comments
-  #end
+  # scope module: 'admin' do
+  #  resources :posts, :comments
+  # end
 
   #scope '/admin' do
-   # resources :articles, :comments
-  #end
+    #Sresources :articles, :comments
+  # end
   #resources :articles do
-    #resources :comments, only: [:index, :new, :create]
+    #resources :comments, only: [:index, :new, :create]Topics which are not clear of Controllers
   
     #resources :articles do
   #  resources :comments, shallow: true
   #end
+
+
   resources :articles do
     member do
       get 'preview'
@@ -47,26 +52,70 @@ Rails.application.routes.draw do
     end
   end 
 
-  #get 'blogs/:id', to: 'blogs#display'
 
-  #get 'blogs/:id/:user:id', to: 'blogs#show'
+  # resource :articles 
+  # get '/articles/:id', to: 'articles#photos'
+ 
+  #resource :photos
+ 
+ 
 
-  #get 'blogs/:id/with_user/:user_id', to: 'blogs#show'
-  
-  #get 'blogs/:id', to: 'blogs#show', defaults: { format: 'jpg'}
-  
-  #get 'blogs', to: 'blogs#destroy', as: :logout
-  
-  match 'blogs', to: 'blogs#show', via: [:get, :post]
-  
-  #get 'blogs/:id', to: 'blogs#show', constraints: { id: /[A-Z]\d{5}/ }
-  
-  get 'blogs/:id', to: 'blogs#show', id: /[A-Z]\d{5}/ 
+  # resources :employees do
+  #   get 'leaves'
+  # end  
 
-  get 'articles', to: 'articles#index', constraints: { subdomain: 'admin' }
+
+  # namespace :admin do 
+  #  resources :employees
+  # end
+
   
-  get '/articles/:status', to: 'clients#index', foo: 'bar'
+  # scope module: 'admin' do
+  #   resources :employees
+  # end
+
+  # scope 'admin' do
+  #   resources :employees
+  # end
+
+
+  # resources :employees do
+  #   resources :posts do
+  #     resources :comments
+  #   end
+  # end
+
+
+  #resources :employees do 
+   # resources :comments, only: [:index, :new, :create]
+  #end
+
+
+  # resources :employees do 
+  #  resources :comments, shallow: true
+  # end
   
-  #get '*path', to: 'author#index', constraints: authorConstraint.new
+  #resources :drafts
+  #resources :quotes
+
+
+  # resources :articles, shallow: true do
+  #   resources :comments
+  #   resources :quotes
+  #   resources :drafts
+  # end
+ 
+  shallow do
+    resources :articles do
+      resources :comments
+      resources :quotes
+      resources :drafts
+    end
+  end
+
+  # resources :magzines
+
+  # resource :drafts
+
 end
 

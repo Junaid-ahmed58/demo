@@ -1,0 +1,44 @@
+<%= form_with model: @article, local: true do |form| %>
+ <%#= form_with(url: search_path, method: "patch") %>
+ <%#= form_tag article_path,  do%>
+ <%#= label_tag :username %>
+ <%#= text_field_tag :username %>
+ <%#= submit_tag %>
+ <%# end%>
+  <% if @article.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+        <%= pluralize(@article.errors.count, "error") %> prohibited
+        this article from being saved:
+      </h2>
+      <ul>
+        <% @article.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+ 
+  
+
+  <%= select_tag(:article_id, raw('<option value="1">Article2</option><option value="2">Article3</option><option value="3">Article4</option>')) %>
+  <%= options_for_select([['Article2',1],['Article3',2], ['Article4',3]])%>
+ 
+  <p>
+    <%= form.label :title %><br>
+    <%= form.text_field :title %>
+  </p>
+ 
+  <p>
+    <%= form.label :text %><br>
+    <%= form.text_area :text %>
+  </p>
+ 
+
+
+  <p>
+    <%= form.submit %>
+  </p>
+ 
+ <% end %>

@@ -8,7 +8,9 @@ class Person < ApplicationRecord
     validates :name, :email, uniqueness: true
     #validates :email, format: { with: /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i }
   has_many :articles, dependent: :destroy 
-
+  #has_many :email, inverse_of: :person
+  #accepts_nested_attributes_for :email
+  
   before_create :greeting_message
   def greeting_message
      puts "Hey! I will run before you create an object!"
